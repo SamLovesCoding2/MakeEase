@@ -1,0 +1,301 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package makeease;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
+import java.awt.event.*;
+import java.util.*;
+import java.awt.GridLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.*;
+
+/**
+ *
+ * @author lupeiyu
+ */
+@SuppressWarnings("serial")
+
+/**
+ *
+ * @author lupeiyu
+ */
+public class NewUser extends javax.swing.JFrame
+{
+
+    String userName;
+    String password;
+    String passwordRe;
+
+    /**
+     * Creates new form NewUser
+     */
+    public NewUser()
+    {
+
+        initComponents();
+        this.setLocationRelativeTo(null);//center form in the screen
+
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents()
+    {
+
+        jPanel1 = new javax.swing.JPanel();
+        btnSignUp = new javax.swing.JButton();
+        labUserName = new javax.swing.JLabel();
+        labPassword = new javax.swing.JLabel();
+        labConfirm = new javax.swing.JLabel();
+        txtUser = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        txtPasswordRe = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("");
+
+        btnSignUp.setText("Sign up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSignUpActionPerformed(evt);
+            }
+        });
+
+        labUserName.setText("UserName:");
+
+        labPassword.setText("Password:");
+
+        labConfirm.setText("Comfirm Password:");
+
+        txtUser.setMinimumSize(new java.awt.Dimension(23, 120));
+        txtUser.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtUserActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("If you have already sign up please ");
+
+        btnLogin.setText("login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 110, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labPassword)
+                            .addComponent(labUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(labConfirm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPasswordRe, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                .addGap(239, 239, 239))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogin)
+                .addGap(52, 52, 52)
+                .addComponent(btnSignUp)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labUserName))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labConfirm)
+                    .addComponent(txtPasswordRe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSignUp)
+                    .addComponent(jLabel1)
+                    .addComponent(btnLogin))
+                .addGap(16, 16, 16))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)                                   
+    {                                       
+
+    }                                  
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt)                                            
+    {                                                
+
+    }                                           
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt)                                        
+    {                                            
+
+    }                                       
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt)                                          
+    {                                              
+
+        password = String.valueOf(txtPassword.getPassword());
+        passwordRe = String.valueOf(txtPasswordRe.getPassword());
+        userName = txtUser.getText();
+
+        //for company: SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        //for company: String date = dateformat.format(vairableName.getDate());
+        if (userName.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "please add a userName");
+        } else if (password.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "add a password");
+        } else if (!password.equals(passwordRe))
+        {
+            JOptionPane.showMessageDialog(null, "Retype the password");
+
+        } else if (checkUsername(userName))
+        {
+            JOptionPane.showMessageDialog(null, "This Username Already Exist");
+        } else
+        {
+            PreparedStatement ps;
+            String query = "INSERT INTO USER_INFO (U_USERNAME, U_PASSWORD) VALUES (?,?)";
+
+            try
+            {
+                ps = MakeEase.getConnection().prepareStatement(query);
+                ps.setString(1, userName);
+                ps.setString(2, password);
+
+                if (ps.executeUpdate() > 0)
+                {
+                    JOptionPane.showMessageDialog(null, "New User Add");
+                }
+            } catch (SQLException | ClassNotFoundException ex)
+            {
+                Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }                                         
+    public boolean checkUsername(String username)
+    {
+        PreparedStatement ps;
+        ResultSet rs;
+        boolean checkUser = false;
+        String query = "SELECT * FROM USER_INFO WHERE U_USERNAME = ?";
+        try
+        {
+            ps = MakeEase.getConnection().prepareStatement(query);
+            ps.setString(1, userName);
+            rs = ps.executeQuery();
+            if (rs.next())
+            {
+                checkUser = true;
+            }
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checkUser;
+    }
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt)                                         
+    {                                             
+        LoginForm l = new LoginForm();
+        l.setVisible(true);
+        l.pack();
+        l.setLocationRelativeTo(null);
+        l.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }                                        
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSignUp;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labConfirm;
+    private javax.swing.JLabel labPassword;
+    private javax.swing.JLabel labUserName;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPasswordRe;
+    private javax.swing.JTextField txtUser;
+    // End of variables declaration                   
+
+}
