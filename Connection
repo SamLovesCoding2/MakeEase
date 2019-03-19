@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package makeease;
+
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class MakeEase
+{
+
+    Connection con = null;
+    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+    static final String DB_URL = "jdbc:derby://localhost:1527/Customer";
+
+    static final String USER = "root";
+    static final String PASS = "root";
+
+    public static Connection getConnection() throws SQLException, ClassNotFoundException
+    {
+
+        {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Customer", "root", "root");
+            return con;
+
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+
+                LoginForm l = new LoginForm();
+                l.setVisible(true);
+                try
+                {
+                    getConnection();
+                    JOptionPane.showMessageDialog(null, "connected to database");
+                } catch (SQLException | HeadlessException e)
+                {
+                    JOptionPane.showMessageDialog(null, e);
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(MakeEase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
+
+    }
+
+}
